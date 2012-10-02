@@ -21,7 +21,7 @@ public class QueryManager {
 	private static final String LOG_TAG = "Query Manager";
 	private static final String NOM_HOTE_BALTAZARE = "http://baltazarestudio.fr";
 	private static final String PATH_RPC = "/private/android/pursuit/rpc.php?";
-	private static final String PARAMS_JSON = "query=android&output=json";
+	private static final String PARAMS_JSON = "query=android&methodName=getAllQuestions&output=json";
 	
 	/**
 	 * @param args
@@ -61,7 +61,7 @@ public class QueryManager {
     			
     			String resJSON = stringBuilder.toString();
     			JSONArray test = new JSONObject(resJSON).getJSONArray("res");
-    			Log.i(LOG_TAG, test.toString());
+    			Log.i(LOG_TAG, resJSON);
     			/*int i = 0;
     			try{
 					for (i = 0; allQuestions.get(i) != null ; i++) {
@@ -75,9 +75,9 @@ public class QueryManager {
     		}
     		
 		} catch (IOException e) {
-			Log.e(LOG_TAG, e.getMessage());
+			Log.e(LOG_TAG, e.getLocalizedMessage());
 		} catch (JSONException e){
-			Log.e(LOG_TAG, e.getMessage());
+			Log.e(LOG_TAG, "json error");
 		}
     	
     	return result;
