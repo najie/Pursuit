@@ -1,5 +1,7 @@
 package com.baltazare.pursuit;
 
+import org.json.JSONArray;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -10,7 +12,8 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        (new QueryManager()).query("getAllQuestions");
+        JSONArray questions = (new QueryManager()).query("getAllQuestions");
+        
         setContentView(R.layout.activity_main);
     }
 

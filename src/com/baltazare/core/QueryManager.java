@@ -27,27 +27,24 @@ public class QueryManager {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-
 	}
 	
 	/**
 	 * 
-	 * @param methodName The API method's name
+	 * @param methodName The API's action method's name
 	 * 
-	 * @return result JSON
+	 * @return result JSONArray
 	 */
-	public JSONObject query(String methodName){
+	public JSONArray query(String methodName) {
     	HttpClient httpClient = new DefaultHttpClient();
-    	JSONObject result = null;
+    	JSONArray result = null;
     	String URI = NOM_HOTE_BALTAZARE+PATH_RPC+PARAMS_JSON;
-    	Log.i(LOG_TAG, URI);
     	try {
     		HttpGet httpGet = new HttpGet(URI);
     		HttpResponse httpResponse = httpClient.execute(httpGet);
     		HttpEntity httpEntity = httpResponse.getEntity();
     		
-    		if( httpEntity != null ){
+    		if( httpEntity != null ) {
     			InputStream inputStream = httpEntity.getContent();
     			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
     			StringBuilder stringBuilder = new StringBuilder();
@@ -60,18 +57,7 @@ public class QueryManager {
     			bufferedReader.close();
     			
     			String resJSON = stringBuilder.toString();
-    			JSONArray test = new JSONObject(resJSON).getJSONArray("res");
-    			Log.i(LOG_TAG, resJSON);
-    			/*int i = 0;
-    			try{
-					for (i = 0; allQuestions.get(i) != null ; i++) {
-						Object temp =  allQuestions.get(i);
-						Log.i(LOG_TAG, temp.toString());
-					}
-    			}catch (JSONException e) {
-					Log.i(LOG_TAG, i+" questions récupérées !");
-				}*/
-    			
+    			result = new JSONObject(resJSON).getJSONArray("res");    			
     		}
     		
 		} catch (IOException e) {

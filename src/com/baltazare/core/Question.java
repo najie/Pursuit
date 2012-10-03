@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class QuestionObject {
+public class Question {
 	
 	String question = "";
 	int nbUsed, nbAnswers = 0;
@@ -29,7 +29,7 @@ public class QuestionObject {
 	OnClickListener onClickGoodAnswer;
 	OnClickListener onClickWrongAnswer;
 	
-	QuestionObject(JSONObject ques, Context context){
+	Question(JSONObject ques, Context context){
 		
 		try {
 			ctx = context;
