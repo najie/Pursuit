@@ -61,7 +61,7 @@ public class QueryManager {
     		}
     		
 		} catch (IOException e) {
-			Log.e(LOG_TAG, e.getLocalizedMessage());
+			Log.e(LOG_TAG, e.getMessage());
 		} catch (JSONException e){
 			Log.e(LOG_TAG, "json error");
 		}
