@@ -15,12 +15,13 @@ import android.widget.Button;
 
 public class Question {
 	
+	private static final String LOG_TAG = "QuestionObject";
+	
 	String question = "";
 	int nbUsed, nbAnswers = 0;
 	String gaString = "";
 	String waString = "";
 	String[][] answers = new String[8][2];
-	private static final String LOG_TAG = "QuestionObject";
 	String gaArray[];
 	String waArray[];
 	int gaIndexes[];

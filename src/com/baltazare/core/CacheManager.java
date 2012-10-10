@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
 import android.content.*;
 import android.util.Log;
 
@@ -49,6 +48,11 @@ public class CacheManager {
 		}
 		
 		return null;
+	}
+	
+	public Boolean isCacheEmpty() {
+		
+		return true;
 	}
 	
 	/**
