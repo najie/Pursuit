@@ -9,7 +9,9 @@ import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
 import android.content.*;
+import android.text.InputFilter.LengthFilter;
 import android.util.Log;
+import android.widget.Toast;
 
 public class CacheManager {
 	
@@ -26,6 +28,7 @@ public class CacheManager {
 			FileOutputStream fos = new FileOutputStream(new File(this.ctx.getCacheDir(), "questions.dat"));
 			fos.write(datas.getBytes());
 			fos.close();
+			Toast.makeText(this.ctx, "Cache created", Toast.LENGTH_SHORT).show();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -50,9 +53,11 @@ public class CacheManager {
 		return null;
 	}
 	
-	public Boolean isCacheEmpty() {
+	public Boolean isCacheFileExists() {
+		File cacheDir = new File(this.ctx.getCacheDir()+"/questions.dat");
+		Boolean isExists = cacheDir.exists();
 		
-		return true;
+		return isExists;
 	}
 	
 	/**

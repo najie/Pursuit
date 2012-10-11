@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -14,35 +15,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
-public class QueryManager {
+public class GetQuestions extends AsyncTask<Void, Integer, JSONArray>{
 
 	private static final String LOG_TAG = "Query Manager";
 	private static final String NOM_HOTE_BALTAZARE = "http://baltazarestudio.fr";
 	private static final String PATH_RPC = "/private/android/pursuit/rpc.php?";
 	private static final String PARAMS_JSON = "query=android&methodName=getAllQuestions&output=json";
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-	}
-	
-	/**
-	 * 
-	 * @param methodName The API's action method's name
-	 * 
-	 * @return result JSONArray
-	 */
-	public JSONArray query(String methodName) {
-    	HttpClient httpClient = new DefaultHttpClient();
-    	JSONArray result = null;
-    	String URI = NOM_HOTE_BALTAZARE+PATH_RPC+PARAMS_JSON;
-    	try {
-    		HttpGet httpGet = new HttpGet(URI);
-    		HttpResponse httpResponse = httpClient.execute(httpGet);
-    		HttpEntity httpEntity = httpResponse.getEntity();
+	@Override
+	protected JSONArray doInBackground(Void... params) {
+		HttpClient httpClient = new DefaultHttpClient();
+		String URI = NOM_HOTE_BALTAZARE+PATH_RPC+PARAMS_JSON;
+		HttpGet httpGet = new HttpGet(URI);
+		JSONArray result = null;
+		
+		try {
+			HttpResponse httpResponse = httpClient.execute(httpGet);
+			
+			HttpEntity httpEntity = httpResponse.getEntity();
     		
     		if( httpEntity != null ) {
     			InputStream inputStream = httpEntity.getContent();
@@ -57,16 +50,19 @@ public class QueryManager {
     			bufferedReader.close();
     			
     			String resJSON = stringBuilder.toString();
-    			result = new JSONObject(resJSON).getJSONArray("res");    			
+    			result = new JSONObject(resJSON).getJSONArray("res");
     		}
-    		
-		} catch (IOException e) {
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
 			Log.e(LOG_TAG, e.getMessage());
-		} catch (JSONException e){
-			Log.e(LOG_TAG, "json error");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Log.e(LOG_TAG, e.getMessage());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			Log.e(LOG_TAG, e.getMessage());
 		}
-    	
-    	return result;
-    }
-
+		
+		return result;
+	}
 }
