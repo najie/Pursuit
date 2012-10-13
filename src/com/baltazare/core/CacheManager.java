@@ -9,7 +9,6 @@ import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
 import android.content.*;
-import android.text.InputFilter.LengthFilter;
 import android.util.Log;
 import android.widget.Toast;
 
