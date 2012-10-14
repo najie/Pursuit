@@ -8,5 +8,8 @@
     <string name="menu_title">Menu</string>
     <string name="menu_play">Jouer</string>
     <string name="title_activity_play">PlayActivity</string>
+    <string name="new_question">Pursuit a t-il de nouvelle question ?</string>
+    <string name="no_question_update">Pas de nouvelles question :(</string>
+    <string name="question_update_available">De nouvelles questions sont disponibles ! :)</string>
 
 </resources>

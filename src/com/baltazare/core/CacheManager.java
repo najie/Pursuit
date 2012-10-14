@@ -22,9 +22,9 @@ public class CacheManager {
 		this.ctx = ctx;
 	}
 	
-	public void save(String datas) {
+	public void save(String datas, String filename) {
 		try {
-			FileOutputStream fos = new FileOutputStream(new File(this.ctx.getCacheDir(), "questions.dat"));
+			FileOutputStream fos = new FileOutputStream(new File(this.ctx.getCacheDir(), filename+".dat"));
 			fos.write(datas.getBytes());
 			fos.close();
 			Toast.makeText(this.ctx, "Cache created", Toast.LENGTH_SHORT).show();
@@ -35,9 +35,9 @@ public class CacheManager {
 		}
 	}
 	
-	public String getCache() {
+	public String getCache(String filename) {
 		try {
-			FileInputStream fis = new FileInputStream(new File(this.ctx.getCacheDir()+"/questions.dat"));
+			FileInputStream fis = new FileInputStream(new File(this.ctx.getCacheDir()+"/"+filename+".dat"));
 			StringWriter writer = new StringWriter();
 			IOUtils.copy(fis, writer);
 			String datas = writer.toString();

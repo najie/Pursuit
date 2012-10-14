@@ -28,7 +28,7 @@ public class PlayActivity extends Activity {
         setContentView(R.layout.play_activity);
         
         //get cache
-        String cacheString = (new CacheManager(this).getCache());
+        String cacheString = (new CacheManager(this).getCache("questions"));
         
         try {
         	//setup questions

@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
-import java.util.concurrent.ExecutionException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -30,12 +29,16 @@ import com.baltazare.core.*;
 
 public class MainActivity extends Activity {
 
-	private static final String LOG_TAG = "Main Activity";  
+	private static final String LOG_TAG = "Main Activity"; 
+	
+	protected CacheManager cm;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if((new CacheManager(this)).isCacheFileExists() == false) {
+        this.cm = new CacheManager(this);
+        if(this.cm.isCacheFileExists() == false) {
         	(new GetQuestions()).execute();
         }
         else {
@@ -49,9 +52,12 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void saveQuestionsInCache(JSONArray questions) {
-    	CacheManager cm = new CacheManager(this);
-    	cm.save(questions.toString());
+    public void saveQuestionsInCache(String questions) {
+    	this.cm.save(questions, "questions");
+    }
+    
+    public void saveQuestionVersionInCache(String questionVersion) {
+    	this.cm.save(questionVersion, "questionVersion");
     }
     
     public void startMenuActivity() {
@@ -64,7 +70,7 @@ public class MainActivity extends Activity {
     /**
      * AsyncTask Class to get all the questions
      */
-    class GetQuestions extends AsyncTask<Void, Integer, JSONArray>{
+    class GetQuestions extends AsyncTask<Void, Integer, Map<String, String>>{
 
     	private static final String LOG_TAG = "Query Manager";
     	private static final String NOM_HOTE_BALTAZARE = "http://baltazarestudio.fr";
@@ -72,11 +78,13 @@ public class MainActivity extends Activity {
     	private static final String PARAMS_JSON = "query=android&methodName=getAllQuestions&output=json";
     	
     	@Override
-    	protected JSONArray doInBackground(Void... params) {
+    	protected Map<String, String> doInBackground(Void... params) {
     		HttpClient httpClient = new DefaultHttpClient();
     		String URI = NOM_HOTE_BALTAZARE+PATH_RPC+PARAMS_JSON;
     		HttpGet httpGet = new HttpGet(URI);
-    		JSONArray result = null;
+    		JSONArray questions = null;
+    		String questionVersion = null;
+    		Map<String, String> result = new HashMap<String, String>();
     		
     		try {
     			HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -96,7 +104,11 @@ public class MainActivity extends Activity {
         			bufferedReader.close();
         			
         			String resJSON = stringBuilder.toString();
-        			result = new JSONObject(resJSON).getJSONArray("res");
+        			JSONObject res = new JSONObject(resJSON).getJSONObject("res");
+        			questions = res.getJSONArray("questions");
+        			questionVersion = res.getString("questionVersion");
+        			result.put("questions", questions.toString());
+        			result.put("questionVersion", questionVersion);
         		}
     		} catch (ClientProtocolException e) {
     			// TODO Auto-generated catch block
@@ -112,8 +124,9 @@ public class MainActivity extends Activity {
     		return result;
     	}
     	
-    	protected void onPostExecute(JSONArray result) {
-    		MainActivity.this.saveQuestionsInCache(result);
+    	protected void onPostExecute(Map<String, String> result) {
+    		MainActivity.this.saveQuestionsInCache(result.get("questions"));
+    		MainActivity.this.saveQuestionVersionInCache(result.get("questionVersion"));
 			MainActivity.this.startMenuActivity();
     	}
     }

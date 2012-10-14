@@ -22,4 +22,45 @@
         android:layout_marginTop="83dp"
         android:text="@string/menu_play" />
 
+    <RelativeLayout
+        android:id="@+id/menuBottomBar"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/darkGrey">
+        
+        <ProgressBar
+            android:id="@+id/menuBottomBarProgress"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/menuBottomBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/menuBottomBarProgress"
+            android:text="@string/new_question"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/refreshUpdateQuestion"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/refresh"
+            android:visibility="invisible" />
+        
+    </RelativeLayout>
+
 </RelativeLayout>
