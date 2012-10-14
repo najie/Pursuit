@@ -65,6 +65,7 @@ public class Question {
 					Button currView = new Button(ctx);
 					currView.setText(answers[i][0]);
 					currView.setTag(answers[i][1]);
+					currView.setTag("answer");
 					currView.setWidth(250);
 					currView.setGravity(Gravity.CENTER);
 					currView.setHeight(LayoutParams.WRAP_CONTENT);
