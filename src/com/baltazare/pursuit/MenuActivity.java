@@ -31,7 +31,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MenuActivity extends Activity {
-
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		//check cache
+        if(!(new CacheManager(this)).checkCacheFiles()) {
+        	Intent mainActivity = new Intent(this, MainActivity.class);
+        	startActivity(mainActivity);
+        }
+	}
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

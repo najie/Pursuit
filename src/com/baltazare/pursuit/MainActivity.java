@@ -17,10 +17,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.net.ConnectivityManagerCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
@@ -37,9 +44,19 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
         this.cm = new CacheManager(this);
-        if(this.cm.isCacheFileExists() == false) {
-        	(new GetQuestions()).execute();
+        
+        if(this.cm.checkCacheFiles() == false) {
+        	ConnectivityManager connManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = connManager.getActiveNetworkInfo();
+        	if(netInfo != null && netInfo.isConnected()) {
+        		(new InitCache()).execute();
+            }
+        	else {
+        		//TODO display noConnectionMsg
+        		displayNoConnectionMsg();
+        	}
         }
         else {
         	this.startMenuActivity();
@@ -50,6 +67,30 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+    
+    private void displayNoConnectionMsg() {
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setMessage("Oops ! Aucune connexion internet en vue !\nImpossible de télécharger les questions :(");
+    	builder.setTitle("Web is far away");
+    	
+    	builder.setPositiveButton("Je règle ça.", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+			}
+		});
+    	builder.setNegativeButton("Plus tard !", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				finish();
+			}
+		});
+    	//block the back button
+    	builder.setCancelable(false);
+    	
+    	builder.create().show();
     }
     
     public void saveQuestionsInCache(String questions) {
@@ -68,9 +109,9 @@ public class MainActivity extends Activity {
     
     
     /**
-     * AsyncTask Class to get all the questions
+     * AsyncTask Class to get the questions and init the cache.
      */
-    class GetQuestions extends AsyncTask<Void, Integer, Map<String, String>>{
+    class InitCache extends AsyncTask<Void, Integer, Map<String, String>>{
 
     	private static final String LOG_TAG = "Query Manager";
     	private static final String NOM_HOTE_BALTAZARE = "http://baltazarestudio.fr";

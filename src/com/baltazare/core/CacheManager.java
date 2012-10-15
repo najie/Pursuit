@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
+import android.annotation.TargetApi;
 import android.content.*;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ public class CacheManager {
 	private static final String TAG = "Cache Manager";
 	
 	Context ctx;
+	
+	String[] fileNames = {"questions", "questionVersion"};
 	
 	public CacheManager(Context ctx) {
 		this.ctx = ctx;
@@ -52,11 +55,24 @@ public class CacheManager {
 		return null;
 	}
 	
-	public Boolean isCacheFileExists() {
-		File cacheDir = new File(this.ctx.getCacheDir()+"/questions.dat");
-		Boolean isExists = cacheDir.exists();
+	public Boolean isCacheFileExists(String filename) {
+		File cacheDir = new File(this.ctx.getCacheDir()+"/"+filename+".dat");
 		
-		return isExists;
+		if(cacheDir.exists() && this.getCache(filename) != "") {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public Boolean checkCacheFiles() {
+		for (String filename : this.fileNames) {
+			if(this.isCacheFileExists(filename) == false) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
