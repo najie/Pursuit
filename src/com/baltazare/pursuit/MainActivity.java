@@ -54,7 +54,6 @@ public class MainActivity extends Activity {
         		(new InitCache()).execute();
             }
         	else {
-        		//TODO display noConnectionMsg
         		displayNoConnectionMsg();
         	}
         }
@@ -71,10 +70,10 @@ public class MainActivity extends Activity {
     
     private void displayNoConnectionMsg() {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage("Oops ! Aucune connexion internet en vue !\nImpossible de télécharger les questions :(");
-    	builder.setTitle("Web is far away");
+    	builder.setMessage(R.string.ma_no_internet);
+    	builder.setTitle(R.string.ma_no_internet_title);
     	
-    	builder.setPositiveButton("Je règle ça.", new DialogInterface.OnClickListener() {
+    	builder.setPositiveButton(R.string.ma_i_fill_fix_it, new DialogInterface.OnClickListener() {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub

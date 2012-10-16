@@ -11,5 +11,12 @@
     <string name="new_question">Pursuit a t-il de nouvelle question ?</string>
     <string name="no_question_update">Pas de nouvelles question :(</string>
     <string name="question_update_available">De nouvelles questions sont disponibles ! :)</string>
+    <string name="bonne_réponse">Bonne réponse</string>
+    <string name="mauvaise_réponse">Mauvaise réponse</string>
+    
+    <!-- Main activity -->
+    <string name="ma_no_internet">Oops ! Aucune connexion internet en vue !\nImpossible de télécharger les questions :(</string>
+    <string name="ma_no_internet_title">Web is far away</string>
+    <string name="ma_i_fill_fix_it">Je règle ça.</string>
 
 </resources>

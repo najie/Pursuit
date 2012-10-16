@@ -83,7 +83,7 @@ public class PlayActivity extends Activity {
 			
 			public void onClick(View v) {
 				PlayActivity ctx = (PlayActivity)v.getContext();
-				Toast.makeText(ctx, "Bonne réponse !", Toast.LENGTH_SHORT).show();
+				Toast.makeText(ctx, R.string.bonne_rÃ©ponse, Toast.LENGTH_SHORT).show();
 				ctx.resetView();				
 			}
 		};
@@ -91,7 +91,7 @@ public class PlayActivity extends Activity {
 			
 			public void onClick(View v) {
 				PlayActivity ctx = (PlayActivity)v.getContext();
-				Toast.makeText(ctx, "Mauvaise réponse !", Toast.LENGTH_SHORT).show();
+				Toast.makeText(ctx, R.string.mauvaise_rÃ©ponse, Toast.LENGTH_SHORT).show();
 				ctx.resetView();
 			}
 		};
