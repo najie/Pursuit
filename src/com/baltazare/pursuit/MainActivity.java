@@ -33,6 +33,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.baltazare.core.*;
+import com.baltazare.pursuit.menu.MenuActivity;
 
 public class MainActivity extends Activity {
 

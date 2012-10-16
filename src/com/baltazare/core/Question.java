@@ -41,10 +41,12 @@ public class Question {
 			int waL = waArray.length;
 			for (int i = 0; i < waL; i++) {
 				this.answers[i][0] = waArray[i].replaceAll("\\\\", "");
+				waArray[i] = this.answers[i][0];
 				this.answers[i][1] = "wrong";
 			}
 			for (int i = 0, l=gaArray.length; i < l; i++) {
 				this.answers[waL+i][0] = gaArray[i].replaceAll("\\\\", "");
+				gaArray[i] = this.answers[waL+i][0];
 				this.answers[waL+i][1] = "good";
 			}
 			Collections.shuffle(Arrays.asList(answers));
@@ -86,6 +88,14 @@ public class Question {
 		}
 		
 		return null;
+	}
+	
+	public String[] getWrongAnswers() {
+		return this.waArray;
+	}
+	
+	public String[] getGoodAnswers() {
+		return this.gaArray;
 	}
 	
 	public String getQuestiontext() {

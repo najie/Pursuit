@@ -13,10 +13,13 @@
     <string name="question_update_available">De nouvelles questions sont disponibles ! :)</string>
     <string name="bonne_réponse">Bonne réponse</string>
     <string name="mauvaise_réponse">Mauvaise réponse</string>
-    
+
     <!-- Main activity -->
     <string name="ma_no_internet">Oops ! Aucune connexion internet en vue !\nImpossible de télécharger les questions :(</string>
     <string name="ma_no_internet_title">Web is far away</string>
     <string name="ma_i_fill_fix_it">Je règle ça.</string>
+    <string name="title_activity_answer">AnswerActivity</string>
+    <string name="title_activity_good_answer">GoodAnswerActivity</string>
+    <string name="title_activity_wrong_answer">WrongAnswerActivity</string>
 
 </resources>

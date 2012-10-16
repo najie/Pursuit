@@ -1,4 +1,4 @@
-package com.baltazare.pursuit;
+package com.baltazare.pursuit.menu;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import com.baltazare.core.CacheManager;
+import com.baltazare.pursuit.MainActivity;
+import com.baltazare.pursuit.R;
+import com.baltazare.pursuit.R.id;
+import com.baltazare.pursuit.R.layout;
+import com.baltazare.pursuit.R.menu;
+import com.baltazare.pursuit.R.string;
+import com.baltazare.pursuit.play.PlayActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

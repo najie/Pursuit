@@ -20,17 +20,41 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MenuActivity"
+            android:name=".menu.MenuActivity"
             android:label="@string/title_activity_menu" >
         </activity>
         <activity
-            android:name=".PlayActivity"
+            android:name=".play.PlayActivity"
             android:label="@string/title_activity_play"
-         	android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".play.AnswerActivity"
+            android:label="@string/title_activity_answer" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".play.GoodAnswerActivity"
+            android:label="@string/title_activity_good_answer" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.baltazare.pursuit.play.AnswerActivity" />
+        </activity>
+        <activity
+            android:name=".play.WrongAnswerActivity"
+            android:label="@string/title_activity_wrong_answer" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.baltazare.pursuit.play.AnswerActivity" />
         </activity>
     </application>
 

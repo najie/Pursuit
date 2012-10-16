@@ -1,6 +1,5 @@
-package com.baltazare.pursuit;
+package com.baltazare.pursuit.play;
 
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,6 +8,7 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.TextureView;
@@ -22,17 +22,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baltazare.core.*;
+import com.baltazare.pursuit.R;
+import com.baltazare.pursuit.R.id;
+import com.baltazare.pursuit.R.layout;
+import com.baltazare.pursuit.R.menu;
+import com.baltazare.pursuit.R.string;
 
 public class PlayActivity extends Activity {
 	
 	private static final String LOG_TAG = "Play Activity";
+	static final int ANSWER_REQUEST = 0;
 	private JSONArray questions = null;
 	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.play_activity);
+        setContentView(R.layout.activity_play);
         
         //get cache
         String cacheString = (new CacheManager(this).getCache("questions"));
@@ -77,22 +83,32 @@ public class PlayActivity extends Activity {
     	return question;
     }
     
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	this.resetView();
+    }
+    
     private void displayQuestion(Question question) {
     	//setup onCickListeners
 		OnClickListener onClickGoodAnswer = new OnClickListener() {
 			
 			public void onClick(View v) {
 				PlayActivity ctx = (PlayActivity)v.getContext();
-				Toast.makeText(ctx, R.string.bonne_réponse, Toast.LENGTH_SHORT).show();
-				ctx.resetView();				
+				Intent goodAnsActivity = new Intent(ctx, GoodAnswerActivity.class);
+				startActivityForResult(goodAnsActivity, ANSWER_REQUEST);
 			}
 		};
-		OnClickListener onClickWrongAnswer = new OnClickListener() {
+		OnClickListener onClickWrongAnswer = new OnWrongAnsClickListener(question.getGoodAnswers()) {
 			
 			public void onClick(View v) {
 				PlayActivity ctx = (PlayActivity)v.getContext();
-				Toast.makeText(ctx, R.string.mauvaise_réponse, Toast.LENGTH_SHORT).show();
-				ctx.resetView();
+				
+				Bundle bundle = new Bundle();
+				bundle.putStringArray("goodAnswers", this.goodAnswers);
+				
+				Intent wrongAnsActivity = new Intent(ctx, WrongAnswerActivity.class);
+				wrongAnsActivity.putExtras(bundle);
+				
+				startActivityForResult(wrongAnsActivity, ANSWER_REQUEST);
 			}
 		};
 		
@@ -108,11 +124,5 @@ public class PlayActivity extends Activity {
 		
 		//set the question text
 		((TextView)findViewById(R.id.questionText)).setText(question.getQuestiontext());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.play_activity, menu);
-        return true;
     }
 }
