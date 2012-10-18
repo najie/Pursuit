@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="62dp"
-        android:text="Large Text"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
@@ -23,5 +23,14 @@
         android:orientation="vertical" >
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/player_infos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

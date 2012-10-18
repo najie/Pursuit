@@ -11,7 +11,6 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,11 +18,6 @@ import org.json.JSONObject;
 import com.baltazare.core.CacheManager;
 import com.baltazare.pursuit.MainActivity;
 import com.baltazare.pursuit.R;
-import com.baltazare.pursuit.R.id;
-import com.baltazare.pursuit.R.layout;
-import com.baltazare.pursuit.R.menu;
-import com.baltazare.pursuit.R.string;
-import com.baltazare.pursuit.play.PlayActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

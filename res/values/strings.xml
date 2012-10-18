@@ -11,8 +11,8 @@
     <string name="new_question">Pursuit a t-il de nouvelle question ?</string>
     <string name="no_question_update">Pas de nouvelles question :(</string>
     <string name="question_update_available">De nouvelles questions sont disponibles ! :)</string>
-    <string name="bonne_réponse">Bonne réponse</string>
-    <string name="mauvaise_réponse">Mauvaise réponse</string>
+    <string name="bonne_reponse">Bonne réponse</string>
+    <string name="mauvaise_reponse">Mauvaise réponse</string>
     <string name="cancel">Annuler</string>
 
     <!-- Main activity -->
@@ -31,7 +31,13 @@
     <string name="cp_lets_begin">C\'est parti !</string>
     <string name="title_activity_choose_player">ChoosePlayer</string>
     
+    <!-- Add a friend -->
+    <string name="af_whats_your_friends_name">Et comment s\'appelle ton ami(e) ?</string>
+    <string name="af_let_him_choose_his_universe">Laisse-le choisir son univers !</string>
+    <string name="af_add">Ajouter</string>
+
     <!-- Choose Player activity -->
     <string name="chp_choose_your_player">Mais&#8230; qui es-tu déjà ?!</string>
+    <string name="title_activity_add_friend">AddFriendActivity</string>
 
 </resources>

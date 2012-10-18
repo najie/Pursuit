@@ -184,3 +184,8 @@ local.properties
 
 #Logs
 *.log
+
+###########
+# Eclipse
+###########
+project.properties

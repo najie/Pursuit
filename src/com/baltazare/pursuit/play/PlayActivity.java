@@ -40,6 +40,8 @@ public class PlayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
         
+        //TODO get players pick a random one then display this name
+        
         //get cache
         String cacheString = (new CacheManager(this).getCache("questions"));
         

@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="172dp"
-        android:text="@string/mauvaise_réponse"
+        android:text="@string/mauvaise_reponse"
         android:textAppearance="?android:attr/textAppearanceLarge" 
         tools:context=".WrongAnswerActivity" />
 
@@ -22,7 +22,7 @@
         android:layout_below="@+id/wrongAnsTxt"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp"
-        android:text="Medium Text"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

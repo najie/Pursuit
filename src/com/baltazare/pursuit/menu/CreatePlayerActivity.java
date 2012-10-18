@@ -58,7 +58,7 @@ public class CreatePlayerActivity extends Activity {
 		JSONObject playerDatas = new JSONObject();
 		JSONArray datas =  new JSONArray();
 		try {
-			playerDatas.put("playerName", name);
+			playerDatas.put("name", name);
 			playerDatas.put("score", 0);
 			
 			datas.put(0, playerDatas);

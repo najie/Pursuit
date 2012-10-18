@@ -59,6 +59,10 @@
             android:name=".menu.ChoosePlayer"
             android:label="@string/title_activity_choose_player" >
         </activity>
+        <activity
+            android:name=".menu.AddFriendActivity"
+            android:label="@string/title_activity_add_friend" >
+        </activity>
     </application>
 
 </manifest>
