@@ -28,6 +28,7 @@ import com.baltazare.pursuit.play.PlayActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -67,8 +68,15 @@ public class MenuActivity extends Activity {
         playButton.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				Intent createPlayerActivity = new Intent(v.getContext(), CreatePlayerActivity.class);
-				v.getContext().startActivity(createPlayerActivity);
+				Context ctx = v.getContext();
+				if((new CacheManager(ctx)).isCacheFileExists("players")) {
+		        	Intent intent =  new Intent(ctx, ChoosePlayer.class);
+		        	startActivity(intent);
+		        }
+				else {
+					Intent createPlayerActivity = new Intent(ctx, CreatePlayerActivity.class);
+					startActivity(createPlayerActivity);
+				}
 			}
 		});
         

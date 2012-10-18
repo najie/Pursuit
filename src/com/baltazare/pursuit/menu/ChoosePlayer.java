@@ -29,6 +29,7 @@ public class ChoosePlayer extends Activity {
         try {
 			JSONArray players = new JSONArray(playersJson);
 			
+			
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, e.getMessage());
 		}

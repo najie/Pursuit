@@ -29,27 +29,22 @@ public class CreatePlayerActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        CacheManager cm = new CacheManager(this);
-        if(cm.isCacheFileExists("players")) {
-        	
-        }
-        else {
-        	setContentView(R.layout.activity_create_player);
-        	Button letsBegin = (Button)findViewById(R.id.cp_lets_begin);
-            letsBegin.setOnClickListener(new View.OnClickListener() {
-    			
-    			public void onClick(View v) {
-    				//get input value
-    				EditText nameInput = (EditText)findViewById(R.id.cp_name_input);
-    				String name = nameInput.getText().toString();
-    				//create Player
-    				if(name == null || name.equals("") == false) {
-    					(new CreatePlayer(v.getContext())).execute(name);
-    				}
-    			}
-    		});
-        }
+
+    	setContentView(R.layout.activity_create_player);
+    	Button letsBegin = (Button)findViewById(R.id.cp_lets_begin);
+        letsBegin.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				//get input value
+				EditText nameInput = (EditText)findViewById(R.id.cp_name_input);
+				String name = nameInput.getText().toString();
+				//create Player
+				if(name == null || name.equals("") == false) {
+					CreatePlayerActivity cp = (CreatePlayerActivity)v.getContext();
+					cp.createPlayer(name);
+				}
+			}
+		});
     }
 
     @Override
@@ -58,35 +53,45 @@ public class CreatePlayerActivity extends Activity {
         return true;
     }
     
-    class CreatePlayer extends AsyncTask<String, Integer, Boolean> {
+    private void createPlayer(String name) {
+    	CacheManager cm = new CacheManager(this);
+		JSONObject playerDatas = new JSONObject();
+		JSONArray datas =  new JSONArray();
+		try {
+			playerDatas.put("playerName", name);
+			playerDatas.put("score", 0);
+			
+			datas.put(0, playerDatas);
+			
+			cm.save(datas.toString(), "players");
+			Toast.makeText(this, "joueur créé", Toast.LENGTH_SHORT).show();
+		} catch (JSONException e) {
+			Log.e(LOG_TAG, e.getMessage());
+		}
+    }
+    
+    private Boolean addPlayer(String name) {
+    	CacheManager cm = new CacheManager(this);
     	
-    	Context ctx = null;
-    	
-    	public CreatePlayer(Context ctx) {
-    		this.ctx = ctx;
+    	if(cm.isCacheFileExists("players") == false) {
+    		return false;
     	}
     	
-		@Override
-		protected Boolean doInBackground(String... params) {
-			CacheManager cm = new CacheManager(this.ctx);
-			JSONObject datas = new JSONObject();
-			try {
-				datas.put("playerName", params);
-				datas.put("score", 0);
-				
-				cm.save(datas.toString(), "players");
-				
-			} catch (JSONException e) {
-				Log.e(LOG_TAG, e.getMessage());
-			}
-			return true;
-		}
-		
-		protected void onPostExecute(Boolean result) {
-			Toast.makeText(this.ctx, "Joueur créé", Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(this.ctx, PlayActivity.class);
-			startActivity(intent);
-		}
+    	JSONObject player = new JSONObject();
     	
+    	try {
+    		player.put("name", name);
+        	player.put("score", 0);
+			JSONArray players = new JSONArray(cm.getCache("players"));
+			players.put(players.length(), player);
+			
+			cm.save(players.toString(), "players");
+			Toast.makeText(this, "joueur ajouté", Toast.LENGTH_SHORT).show();
+		} catch (JSONException e) {
+			Log.e(LOG_TAG, e.getMessage());
+		}
+    		
+    	
+    	return true;
     }
 }
