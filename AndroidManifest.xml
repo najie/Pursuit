@@ -36,11 +36,6 @@
         <activity
             android:name=".play.AnswerActivity"
             android:label="@string/title_activity_answer" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".play.GoodAnswerActivity"
@@ -55,6 +50,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.baltazare.pursuit.play.AnswerActivity" />
+        </activity>
+        <activity
+            android:name=".menu.CreatePlayerActivity"
+            android:label="@string/title_activity_create_player" >
+        </activity>
+        <activity
+            android:name=".menu.ChoosePlayer"
+            android:label="@string/title_activity_choose_player" >
         </activity>
     </application>
 

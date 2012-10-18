@@ -13,6 +13,7 @@
     <string name="question_update_available">De nouvelles questions sont disponibles ! :)</string>
     <string name="bonne_réponse">Bonne réponse</string>
     <string name="mauvaise_réponse">Mauvaise réponse</string>
+    <string name="cancel">Annuler</string>
 
     <!-- Main activity -->
     <string name="ma_no_internet">Oops ! Aucune connexion internet en vue !\nImpossible de télécharger les questions :(</string>
@@ -21,5 +22,16 @@
     <string name="title_activity_answer">AnswerActivity</string>
     <string name="title_activity_good_answer">GoodAnswerActivity</string>
     <string name="title_activity_wrong_answer">WrongAnswerActivity</string>
+    <string name="title_activity_create_player">CreatePlayerActivity</string>
+
+    <!-- Create Player activity -->
+    <string name="cp_hi_im_pursuit">Salut, moi c\'est Pursuit.</string>
+    <string name="cp_and_you">Et toi ?</string>
+    <string name="cp_add_player">Ajouter un(e) ami(e)</string>
+    <string name="cp_lets_begin">C\'est parti !</string>
+    <string name="title_activity_choose_player">ChoosePlayer</string>
+    
+    <!-- Choose Player activity -->
+    <string name="chp_choose_your_player">Mais&#8230; qui es-tu déjà ?!</string>
 
 </resources>

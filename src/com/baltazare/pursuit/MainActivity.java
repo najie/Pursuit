@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
         this.cm = new CacheManager(this);
         
         if(this.cm.checkCacheFiles() == false) {
+        	//check internet status
         	ConnectivityManager connManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = connManager.getActiveNetworkInfo();
         	if(netInfo != null && netInfo.isConnected()) {
@@ -61,12 +62,6 @@ public class MainActivity extends Activity {
         else {
         	this.startMenuActivity();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
     }
     
     private void displayNoConnectionMsg() {

@@ -30,7 +30,6 @@ public class CacheManager {
 			FileOutputStream fos = new FileOutputStream(new File(this.ctx.getCacheDir(), filename+".dat"));
 			fos.write(datas.getBytes());
 			fos.close();
-			Toast.makeText(this.ctx, "Cache created", Toast.LENGTH_SHORT).show();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

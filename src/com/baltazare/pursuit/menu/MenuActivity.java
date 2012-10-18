@@ -67,8 +67,8 @@ public class MenuActivity extends Activity {
         playButton.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				Intent playActivity = new Intent(v.getContext(), PlayActivity.class);
-				v.getContext().startActivity(playActivity);
+				Intent createPlayerActivity = new Intent(v.getContext(), CreatePlayerActivity.class);
+				v.getContext().startActivity(createPlayerActivity);
 			}
 		});
         
