@@ -33,18 +33,9 @@
         android:ems="10"
         android:inputType="text" >
 
-        <requestFocus />
-    </EditText>
+        <requestFocus android:layout_width="wrap_content" />
 
-    <Button
-        android:id="@+id/cp_add_player"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cp_name_input"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/cp_add_player"
-        android:textSize="13dp" />
+    </EditText>
 
     <Button
         android:id="@+id/cp_cancel"
@@ -64,5 +55,27 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
         android:text="@string/cp_lets_begin" />
+
+    <Button
+        android:id="@+id/cp_add_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cp_name_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/cp_add_player"
+        android:textSize="13dp" />
+
+    <LinearLayout
+        android:id="@+id/cp_list_friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cp_lets_begin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/cp_add_player"
+        android:orientation="vertical" >
+
+    </LinearLayout>
 
 </RelativeLayout>

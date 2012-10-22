@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name=".menu.MenuActivity"
-            android:label="@string/title_activity_menu" >
+            android:label="@string/title_activity_menu">
+
         </activity>
         <activity
             android:name=".play.PlayActivity"

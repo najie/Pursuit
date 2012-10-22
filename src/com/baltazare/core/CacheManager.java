@@ -19,7 +19,7 @@ public class CacheManager {
 	
 	Context ctx;
 	
-	String[] fileNames = {"questions", "questionVersion"};
+	String[] fileNames = {"questions", "questionVersion", "players"};
 	
 	public CacheManager(Context ctx) {
 		this.ctx = ctx;

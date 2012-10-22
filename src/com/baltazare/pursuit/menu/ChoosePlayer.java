@@ -32,13 +32,22 @@ public class ChoosePlayer extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_player);
         
-        LinearLayout ll = (LinearLayout)findViewById(R.id.chp_players_name_area);
-        
         CacheManager cm = new CacheManager(this);
         if(cm.isCacheFileExists("players") == false)
         	finish();
+    }
+	
+	public void onResume() {
+		super.onResume();
+		
+		LinearLayout ll = (LinearLayout)findViewById(R.id.chp_players_name_area);
         
-        //display players
+		//remove childs
+		ll.removeAllViews();
+		
+        CacheManager cm = new CacheManager(this);
+		
+		//display players
         String playersJson = cm.getCache("players");
         try {
 			JSONArray players = new JSONArray(playersJson);
@@ -56,8 +65,7 @@ public class ChoosePlayer extends Activity {
 						startActivity(intent);
 					}
 				});
-				
-				
+
 				ll.addView(button);
 			}
 			
@@ -65,7 +73,7 @@ public class ChoosePlayer extends Activity {
 			Log.e(LOG_TAG, e.getMessage());
 		}
         
-        //bind add friend
+      //bind add friend
         Button addFriendButton = (Button)findViewById(R.id.chp_add);
         addFriendButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -74,10 +82,8 @@ public class ChoosePlayer extends Activity {
 				startActivity(intent);
 			}
 		});
-        
-        
-    }
-
+	}
+	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_choose_player, menu);

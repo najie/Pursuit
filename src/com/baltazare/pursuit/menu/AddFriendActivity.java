@@ -26,6 +26,7 @@ public class AddFriendActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
         
+        //Binds
         Button addFriendButton = (Button)findViewById(R.id.af_add);
         addFriendButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -39,6 +40,15 @@ public class AddFriendActivity extends Activity {
 				}
 			}
 		});
+        
+        Button cancel = (Button)findViewById(R.id.af_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				finish();
+				
+			}
+		});
     }
 
     @Override
@@ -48,18 +58,28 @@ public class AddFriendActivity extends Activity {
     }
     
     private void addFriend(String name) {
-    	CacheManager cm =  new CacheManager(this);
-    	String playersStr = cm.getCache("players");
     	try {
-			JSONArray players =  new JSONArray(playersStr);
-			int length = players.length();
-			JSONObject player = new JSONObject();
+    		CacheManager cm =  new CacheManager(this);
+        	String playersStr = cm.getCache("players");
+        	
+        	JSONArray players = null;
+        	JSONObject player = new JSONObject();
+        	
 			player.put("name", name);
 			player.put("score", 0);
-			players.put(length, player);
-			
+        	
+        	if(playersStr.equals("null")) {
+        		players = new JSONArray();
+    			players.put(0, player);
+        	}
+        	else {
+        		players =  new JSONArray(playersStr);
+        		players.put(players.length(), player);
+        	}
+        	
+        	Log.i(LOG_TAG, players.toString());
+        	
 			cm.save(players.toString(), "players");
-			Toast.makeText(this, "ami ajouté", Toast.LENGTH_SHORT).show();
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, e.getMessage());
 		}

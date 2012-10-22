@@ -96,6 +96,10 @@ public class MainActivity extends Activity {
     	this.cm.save(questionVersion, "questionVersion");
     }
     
+    public void createPlayersCacheFile() {
+    	this.cm.save("null", "players");
+    }
+    
     public void startMenuActivity() {
     	//Starting the menu activity
         Intent intent = new Intent(this, MenuActivity.class);
@@ -163,6 +167,7 @@ public class MainActivity extends Activity {
     	protected void onPostExecute(Map<String, String> result) {
     		MainActivity.this.saveQuestionsInCache(result.get("questions"));
     		MainActivity.this.saveQuestionVersionInCache(result.get("questionVersion"));
+    		MainActivity.this.createPlayersCacheFile();
 			MainActivity.this.startMenuActivity();
     	}
     }

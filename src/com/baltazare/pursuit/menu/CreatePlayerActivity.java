@@ -13,13 +13,17 @@ import com.baltazare.pursuit.play.PlayActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreatePlayerActivity extends Activity {
@@ -31,6 +35,8 @@ public class CreatePlayerActivity extends Activity {
         super.onCreate(savedInstanceState);
 
     	setContentView(R.layout.activity_create_player);
+    	
+    	/* Bind Buttons */
     	Button letsBegin = (Button)findViewById(R.id.cp_lets_begin);
         letsBegin.setOnClickListener(new View.OnClickListener() {
 			
@@ -41,10 +47,63 @@ public class CreatePlayerActivity extends Activity {
 				//create Player
 				if(name == null || name.equals("") == false) {
 					CreatePlayerActivity cp = (CreatePlayerActivity)v.getContext();
-					cp.createPlayer(name);
+					cp.addPlayer(name);
+					
+					/* start play activity */
+					Intent playActivity = new Intent(v.getContext(), PlayActivity.class);
+					startActivity(playActivity);
 				}
 			}
 		});
+        
+        Button cancel = (Button)findViewById(R.id.cp_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+        	
+			public void onClick(View v) {
+				finish();
+			}
+		});
+        
+        Button addFriend = (Button)findViewById(R.id.cp_add_player);
+        addFriend.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent addFriendActivity = new Intent(v.getContext(), AddFriendActivity.class);
+				startActivity(addFriendActivity);
+			}
+		});
+    }
+
+	public void onResume() {
+    	super.onResume();
+    	
+    	Toast.makeText(this, "resume", Toast.LENGTH_SHORT).show();
+    	//display friends
+    	CacheManager cm = new CacheManager(this);
+    	String playersStr = cm.getCache("players");
+    	
+    	if(playersStr.equals("null") == false) {
+    		
+    		LinearLayout listFriends = (LinearLayout)findViewById(R.id.cp_list_friends);
+    		listFriends.removeAllViews();
+    		
+    		try {
+				JSONArray players = new JSONArray(playersStr);
+				int length = players.length();
+				
+				for (int i = 0; i < length; i++) {
+					TextView txt = new TextView(this);
+					String name = players.getJSONObject(i).getString("name");
+					txt.setText(name);
+					txt.setGravity(Gravity.CENTER);
+					
+					listFriends.addView(txt);
+				}
+				
+			} catch (JSONException e) {
+				Log.e(LOG_TAG, e.getMessage());
+			}
+    	}
     }
 
     @Override
@@ -53,45 +112,31 @@ public class CreatePlayerActivity extends Activity {
         return true;
     }
     
-    private void createPlayer(String name) {
-    	CacheManager cm = new CacheManager(this);
-		JSONObject playerDatas = new JSONObject();
-		JSONArray datas =  new JSONArray();
-		try {
-			playerDatas.put("name", name);
-			playerDatas.put("score", 0);
-			
-			datas.put(0, playerDatas);
-			
-			cm.save(datas.toString(), "players");
-			Toast.makeText(this, "joueur créé", Toast.LENGTH_SHORT).show();
-		} catch (JSONException e) {
-			Log.e(LOG_TAG, e.getMessage());
-		}
-    }
-    
-    private Boolean addPlayer(String name) {
-    	CacheManager cm = new CacheManager(this);
-    	
-    	if(cm.isCacheFileExists("players") == false) {
-    		return false;
-    	}
-    	
-    	JSONObject player = new JSONObject();
-    	
+    private void addPlayer(String name) {
     	try {
-    		player.put("name", name);
-        	player.put("score", 0);
-			JSONArray players = new JSONArray(cm.getCache("players"));
-			players.put(players.length(), player);
-			
+    		CacheManager cm =  new CacheManager(this);
+        	String playersStr = cm.getCache("players");
+        	
+        	JSONArray players = null;
+        	JSONObject player = new JSONObject();
+        	
+			player.put("name", name);
+			player.put("score", 0);
+        	
+        	if(playersStr.equals("null")) {
+        		players = new JSONArray();
+    			players.put(0, player);
+        	}
+        	else {
+        		players =  new JSONArray(playersStr);
+        		players.put(players.length(), player);
+        	}
+        	
+        	Log.i(LOG_TAG, players.toString());
+        	
 			cm.save(players.toString(), "players");
-			Toast.makeText(this, "joueur ajouté", Toast.LENGTH_SHORT).show();
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, e.getMessage());
 		}
-    		
-    	
-    	return true;
     }
 }

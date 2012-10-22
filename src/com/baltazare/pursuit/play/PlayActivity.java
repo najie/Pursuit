@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.TextureView;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.baltazare.pursuit.R.id;
 import com.baltazare.pursuit.R.layout;
 import com.baltazare.pursuit.R.menu;
 import com.baltazare.pursuit.R.string;
+import com.baltazare.pursuit.menu.MenuActivity;
 
 public class PlayActivity extends Activity {
 	
@@ -57,6 +59,16 @@ public class PlayActivity extends Activity {
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, e.getMessage());
 		}
+    }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent menuActivity = new Intent(this, MenuActivity.class);
+            menuActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(menuActivity);
+        }
+        return super.onKeyDown(keyCode, event);
     }
     
     private void resetView() {
