@@ -61,16 +61,6 @@ public class PlayActivity extends Activity {
 		}
     }
     
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            Intent menuActivity = new Intent(this, MenuActivity.class);
-            menuActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(menuActivity);
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-    
     private void resetView() {
     	this.cleanView();
     	this.displayQuestion(this.pickARandomQuestion());
@@ -97,7 +87,9 @@ public class PlayActivity extends Activity {
     	return question;
     }
     
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onResume() {
+    	super.onResume();
+    	
     	this.resetView();
     }
     

@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.baltazare.core.CacheManager;
+import com.baltazare.core.PlayerManager;
 import com.baltazare.pursuit.R;
 import com.baltazare.pursuit.R.layout;
 import com.baltazare.pursuit.R.menu;
@@ -33,10 +34,10 @@ public class CreatePlayerActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
     	setContentView(R.layout.activity_create_player);
     	
-    	/* Bind Buttons */
+    	/* START BUTTON */
     	Button letsBegin = (Button)findViewById(R.id.cp_lets_begin);
         letsBegin.setOnClickListener(new View.OnClickListener() {
 			
@@ -52,6 +53,8 @@ public class CreatePlayerActivity extends Activity {
 					/* start play activity */
 					Intent playActivity = new Intent(v.getContext(), PlayActivity.class);
 					startActivity(playActivity);
+					
+					finish();
 				}
 			}
 		});
@@ -77,7 +80,6 @@ public class CreatePlayerActivity extends Activity {
 	public void onResume() {
     	super.onResume();
     	
-    	Toast.makeText(this, "resume", Toast.LENGTH_SHORT).show();
     	//display friends
     	CacheManager cm = new CacheManager(this);
     	String playersStr = cm.getCache("players");
@@ -105,7 +107,7 @@ public class CreatePlayerActivity extends Activity {
 			}
     	}
     }
-
+	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_create_player, menu);
@@ -113,30 +115,7 @@ public class CreatePlayerActivity extends Activity {
     }
     
     private void addPlayer(String name) {
-    	try {
-    		CacheManager cm =  new CacheManager(this);
-        	String playersStr = cm.getCache("players");
-        	
-        	JSONArray players = null;
-        	JSONObject player = new JSONObject();
-        	
-			player.put("name", name);
-			player.put("score", 0);
-        	
-        	if(playersStr.equals("null")) {
-        		players = new JSONArray();
-    			players.put(0, player);
-        	}
-        	else {
-        		players =  new JSONArray(playersStr);
-        		players.put(players.length(), player);
-        	}
-        	
-        	Log.i(LOG_TAG, players.toString());
-        	
-			cm.save(players.toString(), "players");
-		} catch (JSONException e) {
-			Log.e(LOG_TAG, e.getMessage());
-		}
+    	PlayerManager pm = new PlayerManager(this);
+    	pm.createPlayer(name);
     }
 }
