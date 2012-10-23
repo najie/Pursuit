@@ -57,7 +57,7 @@
             android:label="@string/title_activity_create_player" >
         </activity>
         <activity
-            android:name=".menu.ChoosePlayer"
+            android:name=".menu.ChoosePlayerActivity"
             android:label="@string/title_activity_choose_player" >
         </activity>
         <activity

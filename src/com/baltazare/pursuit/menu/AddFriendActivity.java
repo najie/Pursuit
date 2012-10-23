@@ -47,7 +47,6 @@ public class AddFriendActivity extends Activity {
 			
 			public void onClick(View v) {
 				finish();
-				
 			}
 		});
     }

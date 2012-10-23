@@ -1,5 +1,7 @@
 package com.baltazare.core;
 
+import java.util.Iterator;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,7 +57,27 @@ public class PlayerManager {
 	}
 	
 	public void deletePlayer(String name) {
+		CacheManager cm = new CacheManager(this.ctx);
+		String playersStr = cm.getCache("players");
 		
+		try {
+			JSONArray players = new JSONArray(playersStr);
+			int l = players.length();
+			
+			for (int i = 0; i < l; i++) {
+				String currName = players.getJSONObject(i).getString("name");
+				//TODO suppress the player
+			}
+			
+		} catch (JSONException e) {
+			Log.e(LOG_TAG, e.getMessage());
+		}
+		
+	}
+	
+	public int getNumberOfPlayers() {
+		
+		return 0;
 	}
 	
 	private Boolean isPlayerExists(String name) {

@@ -66,7 +66,7 @@ public class MenuActivity extends Activity {
 				Context ctx = v.getContext();
 				//test if the player cache file is not null
 				if((new CacheManager(ctx)).getCache("players").equals("null") == false) {
-		        	Intent choosePlayerActivity =  new Intent(ctx, ChoosePlayer.class);
+		        	Intent choosePlayerActivity =  new Intent(ctx, ChoosePlayerActivity.class);
 		        	startActivity(choosePlayerActivity);
 		        }
 				else {

@@ -68,12 +68,11 @@
 
     <LinearLayout
         android:id="@+id/cp_list_friends"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/cp_lets_begin"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/cp_add_player"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical" >
 
     </LinearLayout>
