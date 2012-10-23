@@ -58,6 +58,7 @@ public class MenuActivity extends Activity {
 				(new QuestionUpdate()).execute();
 			}
 		});
+        
         final Button playButton = (Button) findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -72,6 +73,15 @@ public class MenuActivity extends Activity {
 					Intent createPlayerActivity = new Intent(ctx, CreatePlayerActivity.class);
 					startActivity(createPlayerActivity);
 				}
+			}
+		});
+        
+        final Button resetPlayers = (Button)findViewById(R.id.reset_players);
+        resetPlayers.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				CacheManager cm = new CacheManager(v.getContext());
+				cm.setCacheFileToNull("players");
 			}
 		});
         
