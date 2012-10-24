@@ -27,7 +27,7 @@ import android.widget.RelativeLayout;
 
 public class ChoosePlayerActivity extends Activity {
 
-	private static final String LOG_TAG = "ChoosPlayer";
+	private static final String LOG_TAG = "ChoosePlayer";
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,10 +124,4 @@ public class ChoosePlayerActivity extends Activity {
 			}
 		});
 	}
-	
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_choose_player, menu);
-        return true;
-    }
 }

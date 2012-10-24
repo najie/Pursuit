@@ -10,7 +10,9 @@ import com.baltazare.pursuit.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.InputFilter;
 import android.text.InputType;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -26,6 +28,26 @@ public class AddFriendActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
+        
+        /* EditText Filter */
+    	InputFilter[] filter = {new InputFilter() {
+			
+			public CharSequence filter(CharSequence source, int start, int end,
+					Spanned dest, int dstart, int dend) {
+				
+				String allowedChars = "abcdefghijklmnopqrstuvwxyz0123456789";
+				if(start < end) {
+					for (int i = start; i < end; i++) {
+						if(allowedChars.contains(Character.toString(source.charAt(i))) == false) {
+							return "";
+						}
+					}
+				}
+				return null;
+			}
+		}};
+		EditText input = (EditText)findViewById(R.id.af_name_input);
+		input.setFilters(filter);
         
         //Binds
         Button addFriendButton = (Button)findViewById(R.id.af_add);

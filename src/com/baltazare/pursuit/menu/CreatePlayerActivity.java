@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -41,6 +43,26 @@ public class CreatePlayerActivity extends Activity {
         super.onCreate(savedInstanceState);
         
     	setContentView(R.layout.activity_create_player);
+    	
+    	/* EditText Filter */
+    	InputFilter[] filter = {new InputFilter() {
+			
+			public CharSequence filter(CharSequence source, int start, int end,
+					Spanned dest, int dstart, int dend) {
+				
+				String allowedChars = "abcdefghijklmnopqrstuvwxyz0123456789";
+				if(start < end) {
+					for (int i = start; i < end; i++) {
+						if(allowedChars.contains(Character.toString(source.charAt(i))) == false) {
+							return "";
+						}
+					}
+				}
+				return null;
+			}
+		}};
+		EditText input = (EditText)findViewById(R.id.cp_name_input);
+		input.setFilters(filter);
     	
     	/* START BUTTON */
     	Button letsBegin = (Button)findViewById(R.id.cp_lets_begin);
