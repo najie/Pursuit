@@ -64,6 +64,11 @@ public class AddFriendActivity extends Activity {
     
     private void addFriend(String name) {
     	PlayerManager pm = new PlayerManager(this);
-    	pm.addFriend(name);
+    	if(pm.getNumberOfPlayers() == pm.getMaxPlayerAllowed()) {
+    		Toast.makeText(this, R.string.af_number_of_player_max_reached, Toast.LENGTH_SHORT).show();
+    	}
+    	else {
+    		pm.addFriend(name);
+    	}
     }
 }

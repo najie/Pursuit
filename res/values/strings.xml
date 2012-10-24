@@ -35,6 +35,7 @@
     <string name="af_whats_your_friends_name">Et comment s\'appelle ton ami(e) ?</string>
     <string name="af_let_him_choose_his_universe">Laisse-le choisir son univers !</string>
     <string name="af_add">Ajouter</string>
+    <string name="af_number_of_player_max_reached">Nombre de joueur maximum atteint</string>
 
     <!-- Choose Player activity -->
     <string name="chp_choose_your_player">Mais&#8230; qui es-tu déjà ?!</string>

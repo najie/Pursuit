@@ -86,11 +86,18 @@ public class CreatePlayerActivity extends Activity {
 	public void onResume() {
     	super.onResume();
     	
-    	//display friends
     	CacheManager cm = new CacheManager(this);
     	String playersStr = cm.getCache("players");
     	PlayerManager pm = new PlayerManager(this);
     	
+    	/* disable add friend button if number of player max is reached */
+    	/* -1 is for the main player slot */
+    	if(pm.getNumberOfPlayers() == (pm.getMaxPlayerAllowed()-1)) {
+    		Button addFriend = (Button)findViewById(R.id.cp_add_player);
+    		addFriend.setEnabled(false);
+    	}
+    	
+    	/* display players */
     	if(pm.getNumberOfPlayers() != 0) {
     		
     		LinearLayout listFriends = (LinearLayout)findViewById(R.id.cp_list_friends);
@@ -116,6 +123,9 @@ public class CreatePlayerActivity extends Activity {
 						public void onClick(View v) {
 							
 							v.setVisibility(View.INVISIBLE);
+							
+							Button addFriend = (Button)findViewById(R.id.cp_add_player);
+							addFriend.setEnabled(true);
 							
 							PlayerManager pm = new PlayerManager(v.getContext());
 							pm.deletePlayer(this.string);

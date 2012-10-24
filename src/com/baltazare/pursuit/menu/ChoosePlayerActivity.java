@@ -48,6 +48,13 @@ public class ChoosePlayerActivity extends Activity {
 		ll.removeAllViews();
 		
         CacheManager cm = new CacheManager(this);
+        PlayerManager pm = new PlayerManager(this);
+        
+        /* Disabled add friend button when number of max player is reached */
+        if(pm.getNumberOfPlayers() == (pm.getMaxPlayerAllowed())) {
+    		Button addFriend = (Button)findViewById(R.id.chp_add);
+    		addFriend.setEnabled(false);
+    	}
 		
 		//display players
         String playersJson = cm.getCache("players");
@@ -89,6 +96,10 @@ public class ChoosePlayerActivity extends Activity {
 						
 						if(pm.getNumberOfPlayers() == 0) {
 							finish();
+						}
+						else {
+							Button addFriend = (Button)findViewById(R.id.chp_add);
+							addFriend.setEnabled(true);
 						}
 					}
 				});

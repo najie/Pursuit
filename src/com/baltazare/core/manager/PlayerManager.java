@@ -11,8 +11,9 @@ import android.util.Log;
 public class PlayerManager {
 	
 	Context ctx = null;
-	private static final String LOG_TAG = "Player Manager";
 	
+	private static final String LOG_TAG = "Player Manager";
+	private static final int MAX_PLAYER_ALLOWED = 4;
 	
 	public Boolean createPlayer(String name) {
 		
@@ -114,6 +115,10 @@ public class PlayerManager {
 	
 	public PlayerManager(Context ctx) {
 		this.ctx = ctx;
+	}
+
+	public int getMaxPlayerAllowed() {
+		return MAX_PLAYER_ALLOWED;
 	}
 	
 }

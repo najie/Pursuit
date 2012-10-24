@@ -30,8 +30,11 @@
         android:layout_below="@+id/cp_and_you"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="44dp"
+        android:maxLines="1"
+        android:maxLength="10"
         android:ems="10"
-        android:inputType="text" >
+        android:inputType="text"
+        android:digits="abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXZ1234567890" >
 
         <requestFocus android:layout_width="wrap_content" />
 
