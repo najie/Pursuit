@@ -1,4 +1,4 @@
-package com.baltazare.core;
+package com.baltazare.core.manager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
-import android.annotation.TargetApi;
 import android.content.*;
 import android.util.Log;
-import android.widget.Toast;
 
 public class CacheManager {
 	
@@ -72,10 +70,6 @@ public class CacheManager {
 			}
 		}
 		return true;
-	}
-	
-	public void setCacheFileToNull(String filename) {
-		this.save("null", filename);
 	}
 
 }

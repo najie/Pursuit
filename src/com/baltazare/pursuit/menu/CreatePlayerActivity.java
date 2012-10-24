@@ -4,9 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.baltazare.core.CacheManager;
-import com.baltazare.core.OnClickListenerStringParam;
-import com.baltazare.core.PlayerManager;
+import com.baltazare.core.listener.OnClickListenerStringParam;
+import com.baltazare.core.manager.CacheManager;
+import com.baltazare.core.manager.PlayerManager;
 import com.baltazare.pursuit.R;
 import com.baltazare.pursuit.R.layout;
 import com.baltazare.pursuit.R.menu;
@@ -89,8 +89,9 @@ public class CreatePlayerActivity extends Activity {
     	//display friends
     	CacheManager cm = new CacheManager(this);
     	String playersStr = cm.getCache("players");
+    	PlayerManager pm = new PlayerManager(this);
     	
-    	if(playersStr.equals("null") == false) {
+    	if(pm.getNumberOfPlayers() != 0) {
     		
     		LinearLayout listFriends = (LinearLayout)findViewById(R.id.cp_list_friends);
     		listFriends.removeAllViews();

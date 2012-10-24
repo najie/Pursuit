@@ -4,9 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.baltazare.core.CacheManager;
-import com.baltazare.core.OnClickListenerStringParam;
-import com.baltazare.core.PlayerManager;
+import com.baltazare.core.listener.OnClickListenerStringParam;
+import com.baltazare.core.manager.CacheManager;
+import com.baltazare.core.manager.PlayerManager;
 import com.baltazare.pursuit.R;
 import com.baltazare.pursuit.R.layout;
 import com.baltazare.pursuit.R.menu;

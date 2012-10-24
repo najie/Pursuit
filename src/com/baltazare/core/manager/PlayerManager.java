@@ -1,10 +1,9 @@
-package com.baltazare.core;
-
-import java.util.Iterator;
+package com.baltazare.core.manager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 import android.content.Context;
 import android.util.Log;
@@ -28,7 +27,7 @@ public class PlayerManager {
 				player.put("name", name);
 				player.put("score", 0);
 	        	
-	        	if(playersStr.equals("null")) {
+	        	if(this.getNumberOfPlayers() == 0) {
 	        		players = new JSONArray();
 	    			players.put(0, player);
 	        	}
@@ -62,25 +61,53 @@ public class PlayerManager {
 		
 		try {
 			JSONArray players = new JSONArray(playersStr);
+			JSONArray newPlayers = new JSONArray();
 			int l = players.length();
 			
 			for (int i = 0; i < l; i++) {
 				String currName = players.getJSONObject(i).getString("name");
-				//TODO suppress the player
+				if(!currName.equals(name)) {
+					newPlayers.put(players.getJSONObject(i));
+				}
 			}
+			
+			cm.save(newPlayers.toString(), "players");
 			
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, e.getMessage());
 		}
-		
 	}
 	
 	public int getNumberOfPlayers() {
+		CacheManager cm = new CacheManager(this.ctx);
+		
+		try {
+			JSONArray players = new JSONArray(cm.getCache("players"));
+			return players.length();
+		} catch (JSONException e) {
+			Log.e(LOG_TAG, e.getMessage());
+		}
 		
 		return 0;
 	}
 	
 	private Boolean isPlayerExists(String name) {
+		CacheManager cm = new CacheManager(this.ctx);
+		try {
+			JSONArray players = new JSONArray(cm.getCache("players"));
+			
+			int l = players.length();
+			
+			for (int i = 0; i < l; i++) {
+				String currName = players.getJSONObject(i).getString("name");
+				if(currName.equals(name)) {
+					return true;
+				}
+			}
+			
+		} catch (JSONException e) {
+			Log.e(LOG_TAG, e.getMessage());
+		}
 		
 		return false;
 	}

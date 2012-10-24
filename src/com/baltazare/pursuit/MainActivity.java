@@ -33,6 +33,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.baltazare.core.*;
+import com.baltazare.core.manager.CacheManager;
 import com.baltazare.pursuit.menu.MenuActivity;
 
 public class MainActivity extends Activity {
@@ -72,7 +73,6 @@ public class MainActivity extends Activity {
     	builder.setPositiveButton(R.string.ma_i_fill_fix_it, new DialogInterface.OnClickListener() {
 			
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
 				startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
 			}
 		});
@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
     }
     
     public void createPlayersCacheFile() {
-    	this.cm.save("null", "players");
+    	this.cm.save((new JSONArray()).toString(), "players");
     }
     
     public void startMenuActivity() {

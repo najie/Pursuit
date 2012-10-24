@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baltazare.core.*;
+import com.baltazare.core.listener.OnWrongAnsClickListener;
+import com.baltazare.core.manager.CacheManager;
 import com.baltazare.pursuit.R;
 import com.baltazare.pursuit.R.id;
 import com.baltazare.pursuit.R.layout;

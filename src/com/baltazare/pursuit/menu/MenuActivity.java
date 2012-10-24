@@ -11,11 +11,13 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-import com.baltazare.core.CacheManager;
+import com.baltazare.core.manager.CacheManager;
+import com.baltazare.core.manager.PlayerManager;
 import com.baltazare.pursuit.MainActivity;
 import com.baltazare.pursuit.R;
 
@@ -65,7 +67,7 @@ public class MenuActivity extends Activity {
 			public void onClick(View v) {
 				Context ctx = v.getContext();
 				//test if the player cache file is not null
-				if((new CacheManager(ctx)).getCache("players").equals("null") == false) {
+				if((new PlayerManager(ctx)).getNumberOfPlayers() != 0) {
 		        	Intent choosePlayerActivity =  new Intent(ctx, ChoosePlayerActivity.class);
 		        	startActivity(choosePlayerActivity);
 		        }
@@ -81,7 +83,7 @@ public class MenuActivity extends Activity {
 			
 			public void onClick(View v) {
 				CacheManager cm = new CacheManager(v.getContext());
-				cm.setCacheFileToNull("players");
+				cm.save((new JSONArray()).toString(), "players");
 			}
 		});
         
